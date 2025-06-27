@@ -1,0 +1,323 @@
+[
+  {
+    "block_type": 3,
+    "text": {
+      "elements": [
+        {
+          "text": "AI编程助手使用指南"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 4,
+    "text": {
+      "elements": [
+        {
+          "text": "简介"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 2,
+    "text": {
+      "elements": [
+        {
+          "text": "AI编程助手是一个强大的工具，可以帮助开发者**提高编程效率**。"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 4,
+    "text": {
+      "elements": [
+        {
+          "text": "主要功能"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 5,
+    "text": {
+      "elements": [
+        {
+          "text": "核心特性"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 9,
+    "children": [
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "智能代码生成"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "实时错误诊断"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "性能优化建议"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "代码重构支持"
+            }
+          ],
+          "style": {}
+        }
+      }
+    ]
+  },
+  {
+    "block_type": 5,
+    "text": {
+      "elements": [
+        {
+          "text": "支持的语言"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 10,
+    "children": [
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "Python"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "JavaScript/TypeScript"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "Java"
+            }
+          ],
+          "style": {}
+        }
+      },
+      {
+        "block_type": 2,
+        "text": {
+          "elements": [
+            {
+              "text": "C++"
+            }
+          ],
+          "style": {}
+        }
+      }
+    ]
+  },
+  {
+    "block_type": 4,
+    "text": {
+      "elements": [
+        {
+          "text": "使用示例"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 5,
+    "text": {
+      "elements": [
+        {
+          "text": "Python代码生成"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 11,
+    "text": {
+      "elements": [
+        {
+          "text": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\n# 使用示例\nfor i in range(10):\n    print(f\"fibonacci({i}) = {fibonacci(i)}\")"
+        }
+      ],
+      "style": {}
+    },
+    "code": {
+      "language": "python"
+    }
+  },
+  {
+    "block_type": 5,
+    "text": {
+      "elements": [
+        {
+          "text": "JavaScript代码生成"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 11,
+    "text": {
+      "elements": [
+        {
+          "text": "function greetUser(name) {\n    return `Hello, ${name}! Welcome to AI Coding Assistant.`;\n}\n\nconsole.log(greetUser(\"开发者\"));"
+        }
+      ],
+      "style": {}
+    },
+    "code": {
+      "language": "javascript"
+    }
+  },
+  {
+    "block_type": 4,
+    "text": {
+      "elements": [
+        {
+          "text": "注意事项"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 12,
+    "text": {
+      "elements": [
+        {
+          "text": "**重要提醒**: 使用AI编程助手时，请始终review生成的代码，确保其符合你的项目需求和安全标准。"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 5,
+    "text": {
+      "elements": [
+        {
+          "text": "最佳实践"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 28,
+    "table": {
+      "header": [
+        "项目",
+        "建议",
+        "注意事项"
+      ],
+      "rows": [
+        [
+          "代码审查",
+          "必须进行",
+          "不要盲目信任"
+        ],
+        [
+          "测试覆盖",
+          "至少80%",
+          "包含边界情况"
+        ],
+        [
+          "性能优化",
+          "渐进式",
+          "避免过度优化"
+        ]
+      ]
+    }
+  },
+  {
+    "block_type": 19
+  },
+  {
+    "block_type": 4,
+    "text": {
+      "elements": [
+        {
+          "text": "总结"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 2,
+    "text": {
+      "elements": [
+        {
+          "text": "AI编程助手是现代开发者的得力工具，合理使用可以显著提升开发效率。"
+        }
+      ],
+      "style": {}
+    }
+  },
+  {
+    "block_type": 2,
+    "text": {
+      "elements": [
+        {
+          "text": "**记住**: 工具是为了帮助我们，而不是替代我们的思考。"
+        }
+      ],
+      "style": {}
+    }
+  }
+]

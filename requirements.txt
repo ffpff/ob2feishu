@@ -1,0 +1,16 @@
+# 核心依赖
+requests>=2.31.0           # HTTP客户端，用于飞书API调用
+ruamel.yaml>=0.17.32       # YAML处理，保持格式
+markdown>=3.4.4            # Markdown解析
+python-frontmatter>=1.0.0  # YAML front-matter处理
+
+# 开发依赖
+pytest>=7.4.0              # 单元测试
+pytest-cov>=4.1.0          # 测试覆盖率
+black>=23.0.0               # 代码格式化
+flake8>=6.0.0               # 代码质量检查
+
+# 可选依赖
+rich>=13.0.0                # 命令行界面美化
+click>=8.1.0                # 命令行参数解析
+python-dotenv>=1.0.0        # 环境变量管理 
