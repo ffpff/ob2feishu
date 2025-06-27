@@ -24,6 +24,22 @@ class FeishuFormatAdapter:
             7: "heading5",
             8: "heading6"
         }
+        
+        # 定义块类型映射
+        self.block_type_mapping = {
+            1: "page",
+            2: "text",
+            3: "heading1", 
+            4: "heading2",
+            5: "heading3",
+            6: "heading4", 
+            7: "heading5",
+            8: "heading6",
+            12: "unordered_list",  # 无序列表
+            13: "ordered_list",   # 有序列表 
+            14: "code",           # 代码块 - 修复为正确的类型14
+            15: "quote"           # 引用块
+        }
     
     def adapt_blocks_for_api(self, blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -72,11 +88,11 @@ class FeishuFormatAdapter:
             return self._adapt_heading_block(adapted_block)
         elif block_type == 2:  # 文本块
             return self._adapt_text_block(adapted_block)
-        elif block_type == 11:  # 代码块
+        elif block_type == 14:  # 代码块
             return self._adapt_code_block(adapted_block)
-        elif block_type in [9, 10]:  # 列表块
+        elif block_type in [8, 9]:  # 列表块
             return self._adapt_list_block(adapted_block)
-        elif block_type == 12:  # 引用块
+        elif block_type == 15:  # 引用块
             return self._adapt_quote_block(adapted_block)
         elif block_type == 28:  # 表格块
             return self._adapt_table_block(adapted_block)
@@ -129,27 +145,29 @@ class FeishuFormatAdapter:
         return block
     
     def _adapt_code_block(self, block: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        适配代码块：使用标准code字段结构
+        """适配代码块"""
+        # 确保block_type是14
+        block["block_type"] = 14
         
-        从: {block_type: 11, text: {elements: [{text: "code"}]}, code: {language: "python"}}
-        到: {block_type: 11, code: {language: "python", elements: [...]}}
-        """
-        # 获取代码内容
-        text_data = block.pop("text", {})
-        elements = text_data.get("elements", [])
+        # 其他代码不变
+        if "code" not in block:
+            self.logger.warning("代码块缺少code字段")
+            return block
+            
+        code_data = block["code"]
         
-        # 获取代码语言信息
-        code_info = block.get("code", {})
-        language = code_info.get("language", "plain")
+        # 确保language字段存在
+        if "language" not in code_data:
+            code_data["language"] = ""
+            
+        # 确保elements格式正确
+        if "elements" in code_data:
+            for element in code_data["elements"]:
+                if "text_run" in element:
+                    # 确保代码块中的text_run没有style字段
+                    if "text_element_style" in element["text_run"]:
+                        del element["text_run"]["text_element_style"]
         
-        # 重新构建code字段
-        block["code"] = {
-            "language": language,
-            "elements": self._convert_elements_to_text_run(elements)
-        }
-        
-        logger.debug(f"适配代码块: 语言 {language}")
         return block
     
     def _adapt_list_block(self, block: Dict[str, Any]) -> Dict[str, Any]:
@@ -159,9 +177,9 @@ class FeishuFormatAdapter:
         block_type = block["block_type"]
         
         # 根据列表类型添加相应字段
-        if block_type == 9:  # 无序列表
+        if block_type == 8:  # 无序列表
             list_field = "bullet_list"
-        elif block_type == 10:  # 有序列表
+        elif block_type == 9:  # 有序列表
             list_field = "ordered_list"
         else:
             raise ValueError(f"无效的列表块类型: {block_type}")
@@ -312,7 +330,7 @@ class FeishuFormatAdapter:
                 errors.extend(text_errors)
         
         # 验证代码块
-        elif block_type == 11:
+        elif block_type == 14:
             if "code" not in block:
                 errors.append(f"块{index}: 代码块缺少code字段")
             elif "text" in block:
@@ -332,6 +350,11 @@ class FeishuFormatAdapter:
                 errors.append(f"块{block_index}.elements[{i}]: 不应包含text字段")
         
         return errors
+
+    def _is_valid_block_type(self, block_type: int) -> bool:
+        """验证块类型是否有效"""
+        valid_types = {1, 2, 3, 4, 5, 6, 7, 8, 12, 13, 14, 15}  # 更新有效类型
+        return block_type in valid_types
 
 
 def adapt_blocks_for_feishu_api(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:

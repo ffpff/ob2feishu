@@ -14,8 +14,9 @@ __description__ = "将Obsidian笔记同步到飞书知识库的工具"
 from .config import Config, get_config
 from .feishu_client import FeishuClient, FeishuAPIError
 from .obsidian_parser import ObsidianParser, ObsidianNote
-from .markdown_converter import MarkdownConverter, convert_markdown_to_feishu
+from .markdown_converter import convert_markdown_to_feishu
 from .format_adapter import FeishuFormatAdapter, adapt_blocks_for_feishu_api, validate_feishu_format
+from .feishu_docs import FeishuDocsClient, FeishuDocument, create_feishu_docs_client
 
 __all__ = [
     "Config",
@@ -24,9 +25,12 @@ __all__ = [
     "FeishuAPIError",
     "ObsidianParser",
     "ObsidianNote",
-    "MarkdownConverter",
+
     "convert_markdown_to_feishu",
     "FeishuFormatAdapter",
     "adapt_blocks_for_feishu_api",
-    "validate_feishu_format"
+    "validate_feishu_format",
+    "FeishuDocsClient",
+    "FeishuDocument",
+    "create_feishu_docs_client"
 ] 

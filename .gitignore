@@ -14,6 +14,7 @@
 .env.test
 .env.*
 env  # 项目中的实际配置文件，包含真实密钥
+env.example
 
 # 配置文件 (可能包含敏感信息)
 config/config.yaml

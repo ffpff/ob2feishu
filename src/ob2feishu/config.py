@@ -15,6 +15,19 @@ from dotenv import load_dotenv
 logger = logging.getLogger(__name__)
 
 
+class ConfigSection:
+    """配置节类"""
+    
+    def __init__(self, parent_config, section_key: str):
+        self.parent_config = parent_config
+        self.section_key = section_key
+    
+    def __getattr__(self, key: str):
+        """动态属性访问"""
+        full_key = f"{self.section_key}.{key}"
+        return self.parent_config.get(full_key)
+
+
 class Config:
     """配置管理类"""
     
@@ -28,6 +41,13 @@ class Config:
         self.config_path = config_path or self._get_default_config_path()
         self.config: Dict[str, Any] = {}
         self._load_config()
+        
+        # 创建嵌套配置对象
+        self.obsidian = ConfigSection(self, 'obsidian')
+        self.feishu = ConfigSection(self, 'feishu')
+        self.sync = ConfigSection(self, 'sync')
+        self.conversion = ConfigSection(self, 'conversion')
+        self.logging_config = ConfigSection(self, 'logging')
     
     def _get_default_config_path(self) -> str:
         """获取默认配置文件路径"""

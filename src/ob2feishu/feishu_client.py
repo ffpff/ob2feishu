@@ -71,7 +71,13 @@ class FeishuClient:
         
         logger.info("正在获取飞书访问令牌...")
         
-        url = f"{self.config.base_url}/open-apis/auth/v3/tenant_access_token/internal"
+        # 构造令牌获取URL
+        if self.config.base_url.endswith('/open-apis'):
+            # 如果base_url已经包含/open-apis
+            url = f"{self.config.base_url}/auth/v3/tenant_access_token/internal"
+        else:
+            # 如果base_url是基础URL
+            url = f"{self.config.base_url}/open-apis/auth/v3/tenant_access_token/internal"
         payload = {
             "app_id": self.config.app_id,
             "app_secret": self.config.app_secret
@@ -130,7 +136,16 @@ class FeishuClient:
         Raises:
             FeishuAPIError: API请求失败
         """
-        url = f"{self.config.base_url}{endpoint}"
+        # 构造完整URL，确保路径正确
+        if endpoint.startswith('/open-apis'):
+            # 如果endpoint已经包含/open-apis，直接拼接到主域名
+            url = f"https://open.feishu.cn{endpoint}"
+        elif self.config.base_url.endswith('/open-apis'):
+            # 如果base_url已经包含/open-apis，直接拼接endpoint
+            url = f"{self.config.base_url}{endpoint}"
+        else:
+            # 如果base_url是基础URL，需要添加/open-apis
+            url = f"{self.config.base_url}/open-apis{endpoint}"
         
         # 获取访问令牌并设置Authorization header
         access_token = self._get_access_token()
